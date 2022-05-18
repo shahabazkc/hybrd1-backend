@@ -7,7 +7,7 @@ export const requireAuth = (
     res: Response,
     next: NextFunction
 ) => {
-    if (!req?.currentClient) {
+    if (!req.currentUser) {
         throw new NotAuthorizedError();
     } else {
         next();
