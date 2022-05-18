@@ -1,1 +1,4 @@
 node_modules
+./common/.git
+./common/.git/*
+./common/.gitignore
