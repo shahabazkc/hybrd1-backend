@@ -1,8 +1,8 @@
 import express from 'express';
 import cookieSession from 'cookie-session';
 import { errorHandler, NotFoundError } from '@hybrd1/common';
+import { userRegistrationRouter } from './routes/register-user';
 
-// Importing Routers
 const app = express();
 
 // Express json middlewares
@@ -20,7 +20,8 @@ app.use(
     })
 );
 
-// All the routes here...
+// Use all the routers here...
+app.use('/api/auth/register', userRegistrationRouter);
 
 //If route handler not found
 app.all('*', async (req, res) => {

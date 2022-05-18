@@ -38,4 +38,4 @@ router.post("/",
 );
 
 
-export { router as registerBuyerRouter };
+export { router as userRegistrationRouter };
