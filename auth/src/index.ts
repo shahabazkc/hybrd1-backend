@@ -1,5 +1,6 @@
 import { app } from './app';
 import { connectDB } from './config/db';
+import { connectEventBus } from './config/event-bus';
 // import { connectEventBus } from './config/eventbus';
 import { natsWrapper } from './nats-wrapper';
 
@@ -8,25 +9,25 @@ const port = 4000;
 const start = async () => {
 
     // Checking the env variables are there
-    // if (!process.env.JWT_KEY) {
-    //     throw new Error('JWT_KEY must be defined');
-    // }
+    if (!process.env.JWT_KEY) {
+        throw new Error('JWT_KEY must be defined');
+    }
     if (!process.env.MONGO_URI) {
         throw new Error('MONGO_URI must be defined');
     }
-    // if (!process.env.NATS_CLUSTER_ID) {
-    //     throw new Error('NATS_CLUSTER_ID must be defined');
-    // }
-    // if (!process.env.NATS_CLIENT_ID) {
-    //     throw new Error('NATS_CLIENT_ID must be defined');
-    // }
-    // if (!process.env.NATS_URL) {
-    //     throw new Error('NATS_URL must be defined');
-    // }
+    if (!process.env.NATS_CLUSTER_ID) {
+        throw new Error('NATS_CLUSTER_ID must be defined');
+    }
+    if (!process.env.NATS_CLIENT_ID) {
+        throw new Error('NATS_CLIENT_ID must be defined');
+    }
+    if (!process.env.NATS_URL) {
+        throw new Error('NATS_URL must be defined');
+    }
 
     try {
         connectDB();
-        // connectEventBus();
+        connectEventBus();
 
         natsWrapper.client.on('close', () => {
             console.log("NATS connection closed");

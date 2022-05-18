@@ -1,7 +1,9 @@
-import { BadRequestError, validateRequest } from '@hybrd1/common';
+import { BadRequestError, Bcrypt, validateRequest } from '@hybrd1/common';
 import express, { Request, Response } from 'express';
+import { UserRegisteredPublisher } from '../events/publishers/user-registered-publisher';
 import { registerMiddleware } from '../middlewares/register-middleware';
 import { User } from '../models/user';
+import { natsWrapper } from '../nats-wrapper';
 
 const router = express.Router();
 
@@ -22,6 +24,7 @@ router.post("/",
         if (user) throw new BadRequestError('User already found');
 
         // Hash the password here
+        password = await Bcrypt.toHash(password);
 
         const userBuild = User.build({
             username,
@@ -31,6 +34,12 @@ router.post("/",
 
         // Save to Db
         await userBuild.save();
+
+        // Publish an event saying that user has registered
+        new UserRegisteredPublisher(natsWrapper.client).publish({
+            userId: userBuild.id,
+            username
+        });
 
         res.json({ status: true, data: userBuild })
 

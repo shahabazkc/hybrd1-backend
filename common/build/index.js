@@ -21,11 +21,15 @@ __exportStar(require("./errors/database-connection-err"), exports);
 __exportStar(require("./errors/not-authorized-error"), exports);
 __exportStar(require("./errors/not-found-error"), exports);
 __exportStar(require("./errors/request-validation-err"), exports);
-//middlewares
+// middlewares
 __exportStar(require("./middlewares/current-user"), exports);
 __exportStar(require("./middlewares/error-handler"), exports);
 __exportStar(require("./middlewares/require-auth"), exports);
 __exportStar(require("./middlewares/validate-request"), exports);
+// services
+__exportStar(require("./services/bcrypt"), exports);
+__exportStar(require("./services/jwt-service"), exports);
 // events
 __exportStar(require("./events/base-publisher"), exports);
 __exportStar(require("./events/base-listener"), exports);
+__exportStar(require("./events/user-registered-event"), exports);
