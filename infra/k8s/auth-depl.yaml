@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: auth
-          image: shahabazkc10/hybrd1d-auth
+          image: shahabazkc10/hybr1d-auth
           env:
             - name: NATS_CLUSTER_ID
               value: hybrd1
@@ -42,5 +42,5 @@ spec:
   ports:
     - name: auth
       protocol: TCP
-      port: 4000
+      port: 80
       targetPort: 4000

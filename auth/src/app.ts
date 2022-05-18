@@ -23,6 +23,9 @@ app.use(
 // Use all the routers here...
 app.use('/api/auth/register', userRegistrationRouter);
 
+const router = express.Router();
+router.get('/api/auth/hello', (req, res) => res.send("hwello"))
+
 //If route handler not found
 app.all('*', async (req, res) => {
     throw new NotFoundError();
