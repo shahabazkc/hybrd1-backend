@@ -21,7 +21,7 @@ router.post("/",
         // Finding the user is already in db with the same username
         const user = await User.findOne({ username });
 
-        if (user) throw new BadRequestError('User already found');
+        if (user) throw new BadRequestError('User with same credentials already exist');
 
         // Hash the password here
         password = await Bcrypt.toHash(password);
