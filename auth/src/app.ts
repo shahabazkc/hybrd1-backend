@@ -2,6 +2,7 @@ import express from 'express';
 import cookieSession from 'cookie-session';
 import { errorHandler, NotFoundError } from '@hybrd1/common';
 import { userRegistrationRouter } from './routes/register-user';
+import { loginUserRouter } from './routes/login';
 
 const app = express();
 
@@ -22,9 +23,8 @@ app.use(
 
 // Use all the routers here...
 app.use('/api/auth/register', userRegistrationRouter);
+app.use('/api/auth/login', loginUserRouter);
 
-const router = express.Router();
-router.get('/api/auth/hello', (req, res) => res.send("hwello"))
 
 //If route handler not found
 app.all('*', async (req, res) => {

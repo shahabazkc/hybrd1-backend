@@ -13,10 +13,10 @@ class JWT extends JWTServices {
         super();
     }
     ;
-    generateToken(clientData) {
+    generateToken(userData) {
         const token = jsonwebtoken_1.default.sign({
-            id: clientData.id,
-            email: clientData.email
+            id: userData.id,
+            username: userData.username
         }, process.env.JWT_KEY);
         return token;
     }

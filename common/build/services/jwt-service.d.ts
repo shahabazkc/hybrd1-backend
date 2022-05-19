@@ -1,12 +1,12 @@
 declare abstract class JWTServices {
-    abstract generateToken(clientData: ClientData): string;
+    abstract generateToken(userData: UserData): string;
 }
-export interface ClientData {
+export interface UserData {
     id: string;
-    email: string;
+    username: string;
 }
 export declare class JWT extends JWTServices {
     constructor();
-    generateToken(clientData: ClientData): string;
+    generateToken(userData: UserData): string;
 }
 export {};
