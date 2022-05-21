@@ -16,3 +16,11 @@ build:
         manual:
           - src: src/**/*.ts
             dest: .
+    - image: shahabazkc10/hybr1d-common-service
+      context: common-service
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        manual:
+          - src: src/**/*.ts
+            dest: .

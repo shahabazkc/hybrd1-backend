@@ -17,3 +17,13 @@ spec:
                 name: auth-srv
                 port:
                   number: 4000
+    - host: hybr1d.dev
+      http:
+        paths:
+          - path: /api/?(.*)
+            pathType: Prefix
+            backend:
+              service:
+                name: common-service-srv
+                port:
+                  number: 4000

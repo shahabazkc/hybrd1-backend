@@ -1,0 +1,46 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: common-service-depl
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: common-service
+  template:
+    metadata:
+      labels:
+        app: common-service
+    spec:
+      containers:
+        - name: common-service
+          image: shahabazkc10/hybr1d-common-service
+          env:
+            - name: NATS_CLUSTER_ID
+              value: hybr1d
+            - name: NATS_CLIENT_ID
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.name
+            - name: NATS_URL
+              value: 'http://nats-srv:4222'
+            - name: MONGO_URI
+              value: 'mongodb://common-service-mongo-srv:27017/common-service'
+            - name: JWT_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: jwt-secret
+                  key: JWT_KEY
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: common-service-srv
+spec:
+  selector:
+    app: common-service
+  ports:
+    - name: common-service
+      protocol: TCP
+      port: 4000
+      targetPort: 4000
