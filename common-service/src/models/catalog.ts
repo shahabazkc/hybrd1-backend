@@ -45,4 +45,4 @@ catalogSchema.statics.build = (attrs: CatalogAttrs) => {
 
 const Catalog = mongoose.model<CatalogDoc, CatalogModel>("catalogs", catalogSchema);
 
-export { Catalog };
+export { Catalog }; 
