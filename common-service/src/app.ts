@@ -2,8 +2,12 @@ import express from 'express';
 import 'express-async-errors';
 import cookieSession from 'cookie-session';
 import { errorHandler, NotFoundError } from '@hybrd1/common';
-// import { userRegistrationRouter } from './routes/register-user';
-// import { loginUserRouter } from './routes/login';
+import { createOrderRoute } from './routes/orders/create-order';
+import { getOrdersRouter } from './routes/orders/get-orders';
+import { createCatalogueRouter } from './routes/catalogs/create-catalogue';
+import { getCatalogueRouter } from './routes/catalogs/get-catalogues';
+import { createProductRouter } from './routes/products/create-product';
+import { getProductsRouter } from './routes/products/get-products';
 
 const app = express();
 
@@ -23,9 +27,12 @@ app.use(
 );
 
 // // Use all the routers here...
-// app.use('/api/auth/register', userRegistrationRouter);
-// app.use('/api/auth/login', loginUserRouter);
-
+app.use('/api/orders/create', createOrderRoute);
+app.use('/api/orders/', getOrdersRouter);
+app.use('/api/catalogs/create', createCatalogueRouter);
+app.use('/api/catalogs/', getCatalogueRouter);
+app.use('/api/product/create', createProductRouter);
+app.use('/api/products/', getProductsRouter);
 
 //If route handler not found
 app.all('*', async (req, res) => {

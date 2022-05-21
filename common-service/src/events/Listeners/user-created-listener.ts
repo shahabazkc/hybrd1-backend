@@ -8,6 +8,8 @@ export class UserCreatedListener extends Listener<UserRegisteredEvent>{
     subject: Subjects.userRegistered = Subjects.userRegistered;
     async onMessage(data: UserRegisteredEvent['data'], msg: Message) {
 
+        console.log("event received");
+        
         const user = await User.findOne({ userId: data.userId });
 
         if (user) throw new Error('User Already Found');

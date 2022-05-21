@@ -38,7 +38,8 @@ router.post("/",
         // Publish an event saying that user has registered
         new UserRegisteredPublisher(natsWrapper.client).publish({
             userId: userBuild.id,
-            username
+            username,
+            typeOfUser:type_of_user
         });
 
         res.json({ status: true, data: userBuild })

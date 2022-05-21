@@ -3,7 +3,6 @@ import mongoose from "mongoose";
 interface CatalogAttrs {
     name: string;
     sellerId: string;
-    product: object[];
 };
 
 interface CatalogModel extends mongoose.Model<any> {
@@ -13,7 +12,6 @@ interface CatalogModel extends mongoose.Model<any> {
 interface CatalogDoc extends mongoose.Document {
     name: string;
     sellerId: string;
-    product: object[];
 };
 
 const catalogSchema = new mongoose.Schema({
@@ -23,10 +21,6 @@ const catalogSchema = new mongoose.Schema({
     },
     sellerId: {
         type: String,
-        required: true
-    },
-    product: {
-        type: Array,
         required: true
     }
 }, {
