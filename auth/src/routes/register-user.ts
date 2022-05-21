@@ -14,7 +14,7 @@ router.post("/",
         let {
             username,
             password,
-            typeOfUser
+            type_of_user
         } = req.body;
 
 
@@ -29,7 +29,7 @@ router.post("/",
         const userBuild = User.build({
             username,
             password,
-            type_of_user: typeOfUser
+            type_of_user: type_of_user
         });
 
         // Save to Db

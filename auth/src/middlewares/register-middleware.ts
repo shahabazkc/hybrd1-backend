@@ -10,7 +10,7 @@ export const registerMiddleware = [
         .isString()
         .isLength({ min: 4, max: 22 })
         .withMessage('Password must be in between 2 and 22 characters'),
-    body('typeOfUser')
+    body('type_of_user')
         .isString()
         .custom((value)=> value === 'buyer'||'seller')
         .withMessage('Type of user must be valid')

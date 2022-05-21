@@ -13,3 +13,4 @@ export * from './services/jwt-service';
 export * from './events/base-publisher';
 export * from './events/base-listener';
 export * from './events/user-registered-event';
+export * from './events/subjects';

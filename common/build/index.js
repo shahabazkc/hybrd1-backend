@@ -33,3 +33,4 @@ __exportStar(require("./services/jwt-service"), exports);
 __exportStar(require("./events/base-publisher"), exports);
 __exportStar(require("./events/base-listener"), exports);
 __exportStar(require("./events/user-registered-event"), exports);
+__exportStar(require("./events/subjects"), exports);

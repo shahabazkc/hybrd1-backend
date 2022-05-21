@@ -5,5 +5,6 @@ export interface UserRegisteredEvent {
     data: {
         userId: string;
         username: string;
+        typeOfUser: string;
     };
 };

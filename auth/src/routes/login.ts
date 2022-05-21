@@ -1,44 +1,47 @@
-import { BadRequestError, Bcrypt, JWT } from '@hybrd1/common';
+import { BadRequestError, Bcrypt, JWT, validateRequest } from '@hybrd1/common';
 import express, { Request, Response } from 'express';
+import { loginMiddleware } from '../middlewares/login-middleware';
 import { User } from '../models/user';
 const router = express.Router();
 
 router.post('/',
+    loginMiddleware, validateRequest,
     async (req: Request, res: Response) => {
 
         let {
             username,
-            password,
-            type_of_user
+            password
         } = req.body;
 
-        const user = await User.findOne({ username: username, type_of_user })
-        if (!user) throw new BadRequestError('User not found');
+        const user = await User.findOne({ username: username })
+        if (!user) {
+            throw new BadRequestError('User not found');
+        }
 
-        Bcrypt.compare(password, user.password)
-            .then(() => {
+        try {
+            let comparePassword = await Bcrypt.compare(password, user.password);
+            // Generate JWT token
+            const userJwt = new JWT().generateToken(
+                {
+                    id: user.id,
+                    username: user.username
+                }
+            );
 
-                // Generate JWT token
-                const userJwt = new JWT().generateToken(
-                    {
-                        id: user.id,
-                        username: user.username
-                    }
-                );
+            // Store it on session Object
+            req.session = {
+                jwt: userJwt
+            };
 
-                // Store it on session Object
-                req.session = {
-                    jwt: userJwt
-                };
-
-                res.json({
-                    status: true,
-                    data: user
-                });
-            })
-            .catch((err) => {
-                throw new Error();
+            res.json({
+                status: true,
+                data: user
             });
+        }
+        catch (err) {
+            throw new BadRequestError('Credentials are wrong');
+        }
+
     }
 );
 
