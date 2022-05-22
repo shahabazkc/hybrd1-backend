@@ -7,7 +7,7 @@ interface ProductAttrs {
     catalogId: string;
 };
 
-interface ProductMOdel extends mongoose.Model<any> {
+interface ProductModel extends mongoose.Model<any> {
     build(attrs: ProductAttrs): ProductDoc;
 };
 
@@ -39,7 +39,7 @@ const productSchema = new mongoose.Schema({
     toJSON: {
         transform(doc, ret) {
             ret.id = ret._id;
-            delete ret.id;
+            delete ret._id;
             delete ret.__v;
         }
     }
@@ -49,7 +49,7 @@ productSchema.statics.build = (attrs: ProductAttrs) => {
     return new Product(attrs);
 };
 
-const Product = mongoose.model<ProductDoc, ProductMOdel>('Products', productSchema);
+const Product = mongoose.model<ProductDoc, ProductModel>('Products', productSchema);
 
 
 export { Product };
