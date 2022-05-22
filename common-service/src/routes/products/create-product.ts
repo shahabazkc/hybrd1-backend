@@ -3,6 +3,7 @@ import express, { Request, Response } from 'express';
 import { createProductMiddleware } from '../../middlewares/create-product-middleware';
 import { Catalog } from '../../models/catalog';
 import { Product } from '../../models/product';
+import { User } from '../../models/user';
 
 const router = express.Router();
 
@@ -13,6 +14,10 @@ router.post('/',
         let { name, price, catalogId } = req.body;
 
         if (!req.currentUser?.id) throw new NotAuthorizedError();
+
+        let user = await User.findOne({ userId: req.currentUser.id });
+
+        if (user.userType !== "seller") throw new BadRequestError('Sellers can only create products');
 
         let catalogFound = await Catalog.findOne({ _id: catalogId, sellerId: req.currentUser?.id });
 

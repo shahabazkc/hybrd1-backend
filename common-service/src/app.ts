@@ -31,7 +31,7 @@ app.use('/api/orders/create', createOrderRoute);
 app.use('/api/orders/', getOrdersRouter);
 app.use('/api/catalogs/create', createCatalogueRouter);
 app.use('/api/catalogs/', getCatalogueRouter);
-app.use('/api/product/create', createProductRouter);
+app.use('/api/products/create', createProductRouter);
 app.use('/api/products/', getProductsRouter);
 
 //If route handler not found

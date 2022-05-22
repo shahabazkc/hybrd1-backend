@@ -1,4 +1,4 @@
-import { BadRequestError, currentUser, requireAuth, validateRequest } from '@hybrd1/common';
+import { BadRequestError, currentUser, requireAuth, validateRequest, NotAuthorizedError } from '@hybrd1/common';
 import express, { Request, Response } from 'express';
 import { getProductMiddleware } from '../../middlewares/get-product-middleware';
 import { Product } from '../../models/product';
@@ -11,6 +11,9 @@ router.get('/:sellerId',
     getProductMiddleware, validateRequest,
     async (req: Request, res: Response) => {
         let { sellerId } = req.params;
+
+        if (!req.currentUser?.id) throw new NotAuthorizedError();
+
         let products = await Product.find({ sellerId: sellerId });
 
         if (!products) throw new BadRequestError('Products not found');
