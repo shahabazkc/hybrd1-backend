@@ -7,5 +7,5 @@ C:\Windows\System32\drivers\etc\hosts file and add the line '127.0.0.1 hybr1d.de
 
 <b> Install docker, kubernetes and skaffold to run the application</b> <br>
  <b> Run 'skaffold run' to start all the services </b> <br>
- For the Documentation 
- <b> Read</b> https://docs.google.com/document/d/16KtU-3YYYtq5YUt4QRqDVdjtjz-khCpms_DFXEp_60E/edit?usp=sharing
+ <b> For the Api Documentation 
+ Read </b> https://docs.google.com/document/d/16KtU-3YYYtq5YUt4QRqDVdjtjz-khCpms_DFXEp_60E/edit?usp=sharing
